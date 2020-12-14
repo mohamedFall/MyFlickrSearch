@@ -16,9 +16,9 @@ export class SearchImagesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  search(event: any) {
-    this.keyword = event.target.value.toLowerCase();
-    this.tags = event.target.value.toLowerCase();
+  search(keyword: string, tags: string) {
+    this.keyword = keyword.toLowerCase();
+    this.tags = tags.toLowerCase();
     if (this.keyword && this.keyword.length > 0) {
       this.flickrService.search_keyword(this.keyword, this.tags).subscribe(data => {
         this.images = data;
