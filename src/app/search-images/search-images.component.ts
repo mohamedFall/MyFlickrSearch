@@ -26,4 +26,13 @@ export class SearchImagesComponent implements OnInit {
     }
   }
 
+  onScroll(): void
+  {
+    if (this.keyword && this.keyword.length > 0) {
+      this.flickrService.search_keyword(this.keyword, this.tags).subscribe(data => {
+        this.images = this.images.concat(data);
+      });
+  }
+  }
+
 }

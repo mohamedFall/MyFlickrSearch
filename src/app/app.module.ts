@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchImagesComponent } from './search-images/search-images.component';
 import { FlickrService } from './services/flickr.service';
+import { InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FlickrService } from './services/flickr.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [FlickrService],
   bootstrap: [AppComponent]
