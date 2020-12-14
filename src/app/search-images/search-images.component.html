@@ -1,0 +1,27 @@
+<section class="section container">
+  <div class="row center">
+    <h4>Bienvenue sur le test du moteur de recherche d'images avec <b>Flickr</b></h4>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="search_keyword" type="text" class="validate" (keyup)="search($event)">
+      <label for="search_keyword">Rechercher une image</label>
+    </div>
+    <div class="input-field col s2">
+      <input id="search_tags" type="text" class="validate" (keyup)="search($event)">
+      <label for="search_tags">Tags</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s3" *ngFor="let image of images ">
+      <div class="card z-depth-2">
+        <div class="card-image">
+          <a>
+            <img class="img responsive-img" src="{{image.url}}_m.jpg" title="{{image.title}}">
+            <span class="img-title card-title truncate" style="font-size: 20px;">{{image.title}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
