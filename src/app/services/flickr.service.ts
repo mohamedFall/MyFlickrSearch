@@ -11,19 +11,20 @@ import {Observable} from 'rxjs';
 })
 
 export class FlickrService {
-  motRechercher: string;
-  pageActuelle = 1;
+  lastKeyword: string;
+  currentPage = 1;
+
   constructor(private http: HttpClient) { }
 
   search_keyword(keyword: string, tags: string): Observable<any> {
-    if (this.motRechercher === keyword) {
-      this.pageActuelle;
+    if (this.lastKeyword === keyword) {
+      this.currentPage++;
     } else {
-      this.pageActuelle = 1;
+      this.currentPage = 1;
     }
-    this.motRechercher = keyword;
+    this.lastKeyword = keyword;
     const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    const params = `api_key=${environment.flickr.key}&tags=${tags}&text=${keyword}&format=json&nojsoncallback=1&per_page=16&page=${this.pageActuelle}`;
+    const params = `api_key=${environment.flickr.key}&tags=${tags}&text=${keyword}&format=json&nojsoncallback=1&per_page=16&page=${this.currentPage}`;
 
     console.log(url + params);
 

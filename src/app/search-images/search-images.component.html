@@ -23,6 +23,12 @@
         </div>
       </div>
     </div>
+    <div class="search-results"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         (scrolled)="onScroll()">
+    </div>
   </div>
   <div
     class="search-results"
