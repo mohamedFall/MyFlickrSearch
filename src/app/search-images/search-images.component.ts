@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FlickrService} from '../services/flickr.service';
+import { FlickrService } from '../services/flickr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-images',
@@ -11,7 +12,7 @@ export class SearchImagesComponent implements OnInit {
   keyword: string;
   tags = '';
 
-  constructor(private flickrService: FlickrService) { }
+  constructor(private flickrService: FlickrService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +32,10 @@ export class SearchImagesComponent implements OnInit {
       this.flickrService.search_keyword(this.keyword, this.tags).subscribe(data => {
         this.images = this.images.concat(data);
       });
-  }
+    }
   }
 
+  displayInfo(id: string) {
+    this.router.navigate(['/image', id]);
+  }
 }
