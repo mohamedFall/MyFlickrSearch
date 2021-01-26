@@ -17,10 +17,6 @@ export class FlickrService {
   currentPage = 1;
   constructor(private http: HttpClient) { }
 
-  url = 'mongodb://localhost';
-  dbName = 'maodo';
-
-  api = "http://localhost:3000/api/etudiants";
   search_keyword(keyword: string, tags: string): Observable<any> {
     if (this.lastKeyword === keyword) {
       this.currentPage++;
@@ -32,7 +28,6 @@ export class FlickrService {
     const params = `api_key=${environment.flickr.key}&tags=${tags}&text=${keyword}&format=json&nojsoncallback=1&per_page=16&page=${this.currentPage}`;
 
     //console.log(url + params);
-    console.log(this.api);
     return this.getPhotos(url + params);
   }
 
