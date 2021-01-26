@@ -7,6 +7,7 @@ import { FlickrPhoto } from '../interfaces/flickr-photo';
 import {Observable} from 'rxjs';
 import {FlickrImageInfo} from '../interfaces/flickr-image-info';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,6 @@ import {FlickrImageInfo} from '../interfaces/flickr-image-info';
 export class FlickrService {
   lastKeyword: string;
   currentPage = 1;
-
   constructor(private http: HttpClient) { }
 
   search_keyword(keyword: string, tags: string): Observable<any> {
@@ -27,8 +27,7 @@ export class FlickrService {
     const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
     const params = `api_key=${environment.flickr.key}&tags=${tags}&text=${keyword}&format=json&nojsoncallback=1&per_page=16&page=${this.currentPage}`;
 
-    console.log(url + params);
-
+    //console.log(url + params);
     return this.getPhotos(url + params);
   }
 
