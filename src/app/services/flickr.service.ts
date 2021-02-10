@@ -15,7 +15,19 @@ import {FlickrImageInfo} from '../interfaces/flickr-image-info';
 export class FlickrService {
   lastKeyword: string;
   currentPage = 1;
+  urlApi = 'http://localhost:3000/api/etudiants';
+  donnes: Object = [];
+
   constructor(private http: HttpClient) { }
+
+  getData(keyword: string) {
+    return this.http
+      .get(`http://localhost:3000/api/photos/${keyword}`);
+  }
+  setData(keyword: string, keyword1: string) {
+    return this.http
+      .get(`http://localhost:3000/api/photos/${keyword}/${keyword1}`);
+  }
 
   search_keyword(keyword: string, tags: string): Observable<any> {
     if (this.lastKeyword === keyword) {
@@ -27,8 +39,19 @@ export class FlickrService {
     const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
     const params = `api_key=${environment.flickr.key}&tags=${tags}&text=${keyword}&format=json&nojsoncallback=1&per_page=16&page=${this.currentPage}`;
 
-    //console.log(url + params);
-    return this.getPhotos(url + params);
+    this.getData(keyword).subscribe(data => {
+      this.donnes = data;
+    });
+    if (typeof( this.donnes[0]) === 'undefined') {
+      console.log("existe pas");
+      this.http.post<any>('http://localhost:3000/api/photos/', { name: keyword, lien: url + params }).subscribe(data => {
+      });
+      return this.getPhotos(url + params);
+    }
+    else {
+      console.log("existe");
+      return this.getPhotos(this.donnes[0].lien);
+    }
   }
 
   getInfo(photoId: string): Observable<any> {
@@ -45,7 +68,7 @@ export class FlickrService {
         owner: imageInfo.owner,
         comments: imageInfo.comments
       };
-      console.log(imageInfo);
+     // console.log(imageInfo);
       return photo;
     }));
   }

@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FlickrService } from '../services/flickr.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-search-images',
   templateUrl: './search-images.component.html',
   styleUrls: ['./search-images.component.css']
 })
+
 export class SearchImagesComponent implements OnInit {
   images = [];
+  test: Object = [];
   keyword: string;
   tags = '';
 
@@ -26,6 +29,13 @@ export class SearchImagesComponent implements OnInit {
       });
     }
   }
+
+  /*donnes(keyword: string) {
+      this.flickrService.getData(keyword).subscribe(data => {
+        this.test = data;
+        console.log(this.test[0].lien);
+      });
+  }*/
 
   onScroll(): void {
     if (this.keyword && this.keyword.length > 0) {
